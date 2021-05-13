@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // import CoinComponent from './CoinComponent'
-import { selectCoins, setcoins } from './coinSlice'
+import { selectCoins, setcoins, getCoins } from './coinSlice'
 function Coin() {
     const coin = useSelector(selectCoins)
     const dispatch = useDispatch();
@@ -14,8 +14,8 @@ function Coin() {
         console.log(coin)
     }
     useEffect(() => { 
-        fetchCoin()
-    }, [])
+        dispatch(getCoins())
+    }, [dispatch])
     return (
         <div>Hey this is the coin
             {coin.map(coin => (
