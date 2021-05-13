@@ -30,6 +30,6 @@ export const coinSlice = createSlice({
 })
 
 export const selectCoins = (state) => state.coins.allCoins
-export const { setcoins } = coinSlice.actions
+// export const { setcoins } = coinSlice.actions
 
 export default coinSlice.reducer
