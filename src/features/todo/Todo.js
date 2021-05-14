@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { create, edit, remove, toggleComplete } from './TodoSlice'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Card, Col, Container, Row } from 'react-bootstrap';
 
 const Todo = () => {
     const [inputText, setInputText] = useState('')
@@ -42,25 +44,33 @@ const Todo = () => {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input onChange={e => setInputText(e.target.value)} value={inputText}/> 
-                <button type="submit">Create Todo</button>
+        <Container fluid>
+            <Row className="justify-content-center">
+                <Col className="mt-5" sm={3}>
+            <form className="input-group" onSubmit={handleSubmit}>
+                <input className="form-control" onChange={e => setInputText(e.target.value)} value={inputText} placeholder="Grab food for dog..."/> 
+                <button className="btn btn-success" type="submit">Create Todo</button>
             </form>
+                </Col>
+            </Row>
+            <Row className="justify-content-center">
+                <Col sm={3}>
             {todos.map(todo =>(
-                <div key={todo.id}>
+                <Card className={todo.isComplete ? "bg-success text-light mt-2" : "bg-dark text-light mt-2"} key={todo.id}>
                     {isEditingTodo === todo.id ? ( <form onSubmit={handleUpdate}>
                         <input onChange={e => setEditText(e.target.value)} value={editText}/>
                         <button type="submit">Edit</button>
                          </form>) : <div>
                     {todo.description} {todo.isComplete ? "DONE" : ""}
-                    <button onClick={handleRemove(todo.id)}>Delete</button>
-                    <button onClick={handleToggle(todo.id)}>Toggle</button>
-                    <button onClick={handleEdit(todo.id)}>Edit</button>
+                    <i className="fa fa-trash text-danger m-2" onClick={handleRemove(todo.id)} aria-hidden="true"></i>
+                    <i className="fa fa-pencil m-2" onClick={handleEdit(todo.id)} aria-hidden="true"></i>
+                    <i className="fa fa-toggle-on m-2" onClick={handleToggle(todo.id)} aria-hidden="true"></i>
                     </div>}
-                </div>
+                </Card>
             ))}
-        </div>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 

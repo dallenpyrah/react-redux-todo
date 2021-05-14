@@ -11,7 +11,7 @@ function Coin() {
     return (
         <div>Hey this is the coin
             {coin.map(coin => (
-                <div key={coin.id}>Hey</div>
+                <div key={coin.id}>{coin.name} {coin.symbol.toUpperCase()}</div>
             ))}
         </div>
         
